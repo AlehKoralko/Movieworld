@@ -1,0 +1,46 @@
+.data-list a {
+    color: #333;
+}
+
+.data-list a:hover, .data-list a:focus {
+    color: #f85c37;
+}
+
+.empty-block {
+    min-height: 100px;
+}
+
+.wb {
+    margin-top: 30px;
+}
+
+.trailer {
+    width: 100%;
+    min-height: 517px;
+}
+
+.trailer-section {
+    margin-top: 50px;
+}
+
+.about-block {
+    margin-bottom: 30px;
+}
+
+.about {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-align: justify;
+}
+
+.btn-primary {
+    height: 50px;
+    background-color: #2d2d2d;
+    border: 0;
+    width: 100%;
+}
+
+.btn-primary:focus, .btn-primary:hover {
+    background-color: #f85c37;
+}

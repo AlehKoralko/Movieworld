@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Raleway|Lora|Comfortaa');
+
+body {
+    background-color: #f2f2f2;
+    font-family: "Comfortaa";
+    font-weight: 300;
+    font-size: 16px;
+    color: #333;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Comfortaa";
+    font-weight: 300;
+    color: #333;
+}
+
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.info {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: #f85c37;
+}
+
+.centered {
+    text-align: center;
+}
+
+a {
+    color: #f2f2f2;
+}
+
+a:hover, a:focus {
+    color: #f85c37;
+    text-decoration: none;
+    outline: 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.navbar {
+    font-weight: 800;
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-inverse {
+    background: rgba(45, 45, 45, 0.5);
+    border-color: rgba(45, 45, 45, 0.5);
+}
+
+.input-group {
+    margin-top: 7px;
+}
+
+.navbar .nav > li > a {
+    color: #f2f2f2;
+    font-family: "Comfortaa";
+}
+
+.navbar-inverse .navbar-brand {
+    color: #f2f2f2;
+    font-weight: bolder;
+    font-size: 22px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#headerwrap {
+    background: url(../img/ironman.jpg) no-repeat center top;
+    margin-top: -10px;
+    padding-top: 20px;
+    text-align: center;
+    background-position: center top;
+    min-height: 500px;
+    width: 100%;
+
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#headerwrap h1 {
+    margin-top: 150px;
+    color: #f2f2f2;
+    font-size: 70px;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+#headerwrap h2 {
+    color: #f2f2f2;
+}
+
+.table a {
+    color: #333;
+}
+
+.w {
+}
+
+.w h4 {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.poster {
+    width: 270px;
+    height: 374px;
+}
+
+.film-name {
+    min-height: 111px;
+}
+
+footer {
+    background-color: #2d2d2d;
+    padding-top: 30px;
+    padding-bottom: 20px;
+
+}
+
+footer h4 {
+    color: antiquewhite;
+}
+
+.section-title {
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+footer i {
+    color: #f2f2f2;
+}
+
+footer i:hover, i:focus {
+    color: #f85c37;
+}
+
+footer a {
+    font-size: 50px;
+    padding: 20px;
+}
+
+.hall {
+    padding-bottom: 20px;
+}
+
+.hall i {
+    color: #FFFFF0;
+
+}
+
+.hall a {
+    font-size: 20px;
+    padding: 2px;
+
+}
+
+a.disabled {
+    pointer-events: none;
+}
+
+a.disabled i {
+    color: #A7A7A1;
+}
+
+a.free {
+    pointer-events: none;
+}
+
+a.free i {
+    color: #FFFFF0;
+}
+
+a.booked {
+    pointer-events: none;
+}
+
+a.booked i {
+    color: #A7A7A1;
+}
+
+a.booked-by-user {
+    pointer-events: none;
+}
+
+a.booked-by-user i {
+    color: #f85c37;
+}
+
+a.selected-by-user {
+    pointer-events: none;
+}
+
+a.selected-by-user i {
+    color: #6eb6ff;
+}
+
+.data-list a {
+    color: #333;
+}
+
+.data-list a:hover, .data-list a:focus {
+    color: #f85c37;
+}
+
+.empty-block {
+    min-height: 100px;
+}
+
+.wb {
+    margin-top: 30px;
+}
+
+.trailer {
+    width: 100%;
+    min-height: 517px;
+}
+
+.trailer-section {
+    margin-top: 50px;
+}
+
+.about-block {
+    margin-bottom: 30px;
+}
+
+.about {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-align: justify;
+}
+
+.btn-primary {
+    height: 50px;
+    background-color: #2d2d2d;
+    border: 0;
+    width: 100%;
+}
+
+.btn-primary:focus, .btn-primary:hover {
+    background-color: #f85c37;
+}
+
+.title {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.date-list {
+    margin: 0;
+}
+
+.date-list li {
+    display: inline;
+    font-size: 28px;
+    font-weight: 700;
+    padding-right: 10px;
+}
+
+.date-list > li > a {
+    color: #333;
+}
+
+.date-list > li > a:focus, .date-list > li > a:hover {
+    color: #f85c37;
+}
+
+.session-block {
+    margin-bottom: 30px;
+}
+
+.ordering {
+    background-color: #D7D3C8;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input {
+    margin-top: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin button {
+    margin-top: 10px;
+}
+
+.has-error {
+    color: red
+}
