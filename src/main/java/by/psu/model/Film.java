@@ -47,21 +47,6 @@ public class Film {
     @Transient
     private String formatDateEnd;
 
-    @Transient
-    private String[] genresId;
-
-    @Transient
-    private String[] actorsId;
-
-    @Transient
-    private String[] directorsId;
-
-    @Transient
-    private String[] operatorsId;
-
-    @Transient
-    private String[] countriesId;
-
     @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
     private Set<Session> sessions;
 
@@ -242,52 +227,12 @@ public class Film {
         this.formatDateEnd = formatDateEnd;
     }
 
-    public String[] getGenresId() {
-        return genresId;
-    }
-
-    public void setGenresId(String[] genresId) {
-        this.genresId = genresId;
-    }
-
-    public String[] getDirectorsId() {
-        return directorsId;
-    }
-
-    public void setDirectorsId(String[] directorsId) {
-        this.directorsId = directorsId;
-    }
-
-    public String[] getOperatorsId() {
-        return operatorsId;
-    }
-
-    public void setOperatorsId(String[] operatorsId) {
-        this.operatorsId = operatorsId;
-    }
-
-    public String[] getCountriesId() {
-        return countriesId;
-    }
-
-    public void setCountriesId(String[] countriesId) {
-        this.countriesId = countriesId;
-    }
-
     public Set<Session> getSessions() {
         return sessions;
     }
 
     public void setSessions(Set<Session> sessions) {
         this.sessions = sessions;
-    }
-
-    public String[] getActorsId() {
-        return actorsId;
-    }
-
-    public void setActorsId(String[] actorsId) {
-        this.actorsId = actorsId;
     }
 
     public double getPrice() {
@@ -300,8 +245,8 @@ public class Film {
 
     @Override
     public String toString() {
-        return "Film [id=" + id + ", name=" + name + ", year=" + year + ", trailer=" + trailer + ", genresId="
-                + genresId + ", directors=" + directors + ", actors=" + actors + ", countries="
+        return "Film [id=" + id + ", name=" + name + ", year=" + year + ", trailer=" + trailer
+                + ", directors=" + directors + ", actors=" + actors + ", countries="
                 + countries + ", genres=" + genres + ", operators=" + operators + "]";
     }
 
