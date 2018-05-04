@@ -27,7 +27,7 @@ public class FilmForm implements Serializable {
     private String[] operatorsId;
     private String[] countriesId;
 
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
     public FilmForm() {
     }
