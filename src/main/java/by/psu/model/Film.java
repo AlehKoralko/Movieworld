@@ -36,7 +36,6 @@ public class Film {
     private LocalDate dateEnd;
 
     @Column(name = "price")
-
     private double price;
 
     @Transient
