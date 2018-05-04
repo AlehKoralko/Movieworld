@@ -1,5 +1,6 @@
 package by.psu.service;
 
+import by.psu.dto.FilmForm;
 import by.psu.model.CinemaHall;
 import by.psu.model.Film;
 import by.psu.model.Session;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface FilmService {
 
-    void addFilm(Film film);
+    void addFilm(FilmForm filmForm);
 
     Film getFilmById(int id);
 

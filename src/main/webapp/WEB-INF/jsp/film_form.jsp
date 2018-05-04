@@ -45,16 +45,16 @@
                         <form:errors path="about"/>
                     </div>
                 </spring:bind>
-                <spring:bind path="formatDateStart">
+                <spring:bind path="dateStart">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" path="formatDateStart" class="form-control" placeholder="date start"/>
-                        <form:errors path="formatDateStart"/>
+                        <form:input type="text" path="dateStart" class="form-control" placeholder="date start"/>
+                        <form:errors path="dateStart"/>
                     </div>
                 </spring:bind>
-                <spring:bind path="formatDateEnd">
+                <spring:bind path="dateEnd">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" path="formatDateEnd" class="form-control" placeholder="date end"/>
-                        <form:errors path="formatDateEnd"/>
+                        <form:input type="text" path="dateEnd" class="form-control" placeholder="date end"/>
+                        <form:errors path="dateEnd"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="actorsId">

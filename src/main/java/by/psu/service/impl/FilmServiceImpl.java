@@ -1,6 +1,7 @@
 package by.psu.service.impl;
 
 import by.psu.dao.*;
+import by.psu.dto.FilmForm;
 import by.psu.model.*;
 import by.psu.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
-    public void addFilm(Film film) {
-        film.setDateStart(filmDateFormatter.parse(film.getFormatDateStart(), LocalDate::from));
-        film.setDateEnd(filmDateFormatter.parse(film.getFormatDateEnd(), LocalDate::from));
+    public void addFilm(FilmForm filmForm) {
+        Film film = filmForm.toFilm();
 
         Set<Actor> actors = new HashSet<>();
         Set<Director> directors = new HashSet<>();
@@ -55,11 +55,11 @@ public class FilmServiceImpl implements FilmService {
         Set<Operator> operators = new HashSet<>();
         Set<Country> countries = new HashSet<>();
 
-        Arrays.stream(film.getActorsId()).forEach(id -> actors.add(actorDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getDirectorsId()).forEach(id -> directors.add(directorDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getGenresId()).forEach(id -> genres.add(genreDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getOperatorsId()).forEach(id -> operators.add(operatorDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getCountriesId()).forEach(id -> countries.add(countryDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getActorsId()).forEach(id -> actors.add(actorDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getDirectorsId()).forEach(id -> directors.add(directorDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getGenresId()).forEach(id -> genres.add(genreDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getOperatorsId()).forEach(id -> operators.add(operatorDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getCountriesId()).forEach(id -> countries.add(countryDao.getById(Integer.valueOf(id))));
 
         film.setActors(actors);
         film.setDirectors(directors);
