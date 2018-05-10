@@ -11,20 +11,20 @@
     <section>
         <br><br><br><br>
         <div class="container">
-            <form:form method="POST" modelAttribute="session" class="form-signin">
+            <form:form method="POST" modelAttribute="sessionForm" class="form-signin">
                 <h2 class="form-signin-heading">Add session form</h2>
-                <spring:bind path="formatDate">
+                <spring:bind path="date">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" path="formatDate" class="form-control" placeholder="date"
+                        <form:input type="text" path="date" class="form-control" placeholder="date"
                                     autofocus="true"/>
-                        <form:errors path="formatDate"/>
+                        <form:errors path="date"/>
                     </div>
                 </spring:bind>
 
-                <spring:bind path="formatTime">
+                <spring:bind path="time">
                     <div class="form-group ${status.error ? 'has-error' : ''}">
-                        <form:input type="text" path="formatTime" class="form-control" placeholder="time"/>
-                        <form:errors path="formatTime"/>
+                        <form:input type="text" path="time" class="form-control" placeholder="time"/>
+                        <form:errors path="time"/>
                     </div>
                 </spring:bind>
                 <spring:bind path="filmId">
