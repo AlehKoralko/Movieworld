@@ -5,7 +5,6 @@ import by.psu.model.Film;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class FilmForm implements Serializable {
 
@@ -17,7 +16,6 @@ public class FilmForm implements Serializable {
     private String about;
     private double price;
 
-    private List<String> displayPeriod;
     private String dateStart;
     private String dateEnd;
 
@@ -86,14 +84,6 @@ public class FilmForm implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public List<String> getDisplayPeriod() {
-        return displayPeriod;
-    }
-
-    public void setDisplayPeriod(List<String> displayPeriod) {
-        this.displayPeriod = displayPeriod;
     }
 
     public String getDateStart() {
