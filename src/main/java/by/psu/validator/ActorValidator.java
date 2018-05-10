@@ -27,8 +27,10 @@ public class ActorValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Required");
 
-        if (actorService.getByName(actor.getName()) != null) {
-            errors.rejectValue("name", "Unique");
+        if (! errors.hasFieldErrors("name")) {
+            if (actorService.getByName(actor.getName()) != null) {
+                errors.rejectValue("name", "Unique");
+            }
         }
     }
 }

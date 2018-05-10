@@ -27,8 +27,10 @@ public class OperatorValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Required");
 
-        if (operatorService.getByName(operator.getName()) != null) {
-            errors.rejectValue("name", "Unique");
+        if (! errors.hasFieldErrors("name")) {
+            if (operatorService.getByName(operator.getName()) != null) {
+                errors.rejectValue("name", "Unique");
+            }
         }
     }
 }

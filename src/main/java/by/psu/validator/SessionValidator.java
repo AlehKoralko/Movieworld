@@ -31,16 +31,20 @@ public class SessionValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "filmId", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cinemaHallId", "Required");
 
-        try {
-            sessionDateformatter.parse(session.getFormatDate(), LocalDate::from);
-        } catch (Exception e) {
-            errors.rejectValue("formatDate", "Format.session.date");
+        if (! errors.hasFieldErrors("formatDate")) {
+            try {
+                sessionDateformatter.parse(session.getFormatDate(), LocalDate::from);
+            } catch (Exception e) {
+                errors.rejectValue("formatDate", "Format.session.date");
+            }
         }
 
-        try {
-            sessionTimeformatter.parse(session.getFormatTime(), LocalTime::from);
-        } catch (Exception e) {
-            errors.rejectValue("formatTime", "Format.session.time");
+        if (! errors.hasFieldErrors("formatTime")) {
+            try {
+                sessionTimeformatter.parse(session.getFormatTime(), LocalTime::from);
+            } catch (Exception e) {
+                errors.rejectValue("formatTime", "Format.session.time");
+            }
         }
     }
 }

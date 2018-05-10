@@ -37,17 +37,22 @@ public class FilmFormValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "genresId", "Required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countriesId", "Required");
 
-        if (filmForm.getYear() < 1950 || filmForm.getYear() > LocalDate.now().getYear() + 1) {
-            errors.rejectValue("year", "Size.film.year");
+        if (! errors.hasFieldErrors("year")) {
+            if (filmForm.getYear() < 1950 || filmForm.getYear() > LocalDate.now().getYear() + 1) {
+                errors.rejectValue("year", "Size.film.year");
+            }
         }
 
-        try {
-            formatter.parse(filmForm.getDateStart(), LocalDate::from);
-        } catch (Exception e) {
-            errors.rejectValue("dateStart", "Format.film.date");
+        if (! errors.hasFieldErrors("dateStart")) {
+            try {
+                formatter.parse(filmForm.getDateStart(), LocalDate::from);
+            } catch (Exception e) {
+                errors.rejectValue("dateStart", "Format.film.date");
+            }
         }
 
 
+        if (! errors.hasFieldErrors("dateEnd"))
         try {
             formatter.parse(filmForm.getDateEnd(), LocalDate::from);
         } catch (Exception e) {

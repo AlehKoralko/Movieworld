@@ -27,8 +27,10 @@ public class GenreValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Required");
 
-        if (genreService.getByName(genre.getName()) != null) {
-            errors.rejectValue("name", "Unique");
+        if (! errors.hasFieldErrors("name")) {
+            if (genreService.getByName(genre.getName()) != null) {
+                errors.rejectValue("name", "Unique");
+            }
         }
     }
 }

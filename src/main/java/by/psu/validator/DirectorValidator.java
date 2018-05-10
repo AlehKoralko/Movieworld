@@ -27,8 +27,10 @@ public class DirectorValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Required");
 
-        if (directorService.getByName(director.getName()) != null) {
-            errors.rejectValue("name", "Unique");
+        if (! errors.hasFieldErrors("name")) {
+            if (directorService.getByName(director.getName()) != null) {
+                errors.rejectValue("name", "Unique");
+            }
         }
     }
 }
