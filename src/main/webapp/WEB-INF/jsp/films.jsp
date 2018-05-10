@@ -14,8 +14,9 @@
                 <c:if test="${!empty filmsList}">
                     <c:forEach items="${filmsList}" var="film">
                         <div class="col-lg-3">
-                            <a href="film_info?id=${film.id}"><img src="img/${film.name}.jpeg" alt=""
-                                                                   class="img-responsive poster"></a>
+                            <a href="film_info?id=${film.id}">
+                                <img src="img/${film.name}.jpeg" alt="" class="img-responsive poster">
+                            </a>
                             <div class="film-name">
                                 <p>${film.name}</p>
                             </div>
