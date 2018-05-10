@@ -36,7 +36,6 @@ public class FilmController {
     @RequestMapping(value = "/film_info")
     public String filmInfo(Model model, @RequestParam("id") int id) {
         model.addAttribute("film", filmService.getFilmById(id));
-        model.addAttribute("citiesList", cityService.getCitiesByFilmSession(id));
 
         return "film_info";
     }
