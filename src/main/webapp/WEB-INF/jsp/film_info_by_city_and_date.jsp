@@ -119,9 +119,9 @@
             </div>
             <div class="col-lg-12 centered">
                 <ul class="date-list">
-                    <c:forEach items="${film.displayPeriod}" var="date" varStatus="loop">
+                    <c:forEach items="${dates}" var="date" varStatus="loop">
                         <li>
-                            <a href="film_info_by_city_and_date?filmId=${film.id}&cityId=${city.id}&date=${date}">${date}</a>
+                            <a href="film_info_by_city_and_date?filmId=${film.id}&cityId=${city.id}&date=${date.key}">${date.value}</a>
                         </li>
                     </c:forEach>
                 </ul>
