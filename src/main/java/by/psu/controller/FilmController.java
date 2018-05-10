@@ -1,5 +1,6 @@
 package by.psu.controller;
 
+import by.psu.model.Film;
 import by.psu.service.CityService;
 import by.psu.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class FilmController {
     @RequestMapping(value = "/film_info")
     public String filmInfo(Model model, @RequestParam("id") int id) {
         model.addAttribute("film", filmService.getFilmById(id));
+        model.addAttribute("citiesList", cityService.getCitiesByFilmSession(id));
 
         return "film_info";
     }
@@ -45,9 +47,12 @@ public class FilmController {
                                  @RequestParam("filmId") int filmId,
                                  @RequestParam("cityId") int cityId) {
 
+        Film film = filmService.getFilmById(filmId);
+
         model.addAttribute("sessionsList", filmService.getFilmsSessionsByCity(filmId, cityId));
-        model.addAttribute("film", filmService.getFilmById(filmId));
+        model.addAttribute("film", film);
         model.addAttribute("city", cityService.getCityById(cityId));
+        model.addAttribute("dates", film.getDisplayPeriod());
 
         return "film_info_by_city";
     }
@@ -58,9 +63,12 @@ public class FilmController {
                                         @RequestParam("cityId") int cityId,
                                         @RequestParam("date") String date) {
 
+        Film film = filmService.getFilmById(filmId);
+
         model.addAttribute("sessionsList", filmService.getFilmsSessionsByCityAndDate(filmId, cityId, date));
-        model.addAttribute("film", filmService.getFilmById(filmId));
+        model.addAttribute("film", film);
         model.addAttribute("city", cityService.getCityById(cityId));
+        model.addAttribute("dates", film.getDisplayPeriod());
 
         return "film_info_by_city_and_date";
     }
@@ -70,9 +78,12 @@ public class FilmController {
                                      @RequestParam("filmId") int filmId,
                                      @RequestParam("cityId") int cityId) {
 
+        Film film = filmService.getFilmById(filmId);
+
         model.addAttribute("sessionsList", filmService.getFilmsSessionsByCity(filmId, cityId));
-        model.addAttribute("film", filmService.getFilmById(filmId));
+        model.addAttribute("film", film);
         model.addAttribute("city", cityService.getCityById(cityId));
+        model.addAttribute("dates", film.getDisplayPeriod());
 
         return "film_sessions_by_city";
     }
@@ -83,9 +94,12 @@ public class FilmController {
                                             @RequestParam("cityId") int cityId,
                                             @RequestParam("date") String date) {
 
+        Film film = filmService.getFilmById(filmId);
+
         model.addAttribute("sessionsList", filmService.getFilmsSessionsByCityAndDate(filmId, cityId, date));
-        model.addAttribute("film", filmService.getFilmById(filmId));
+        model.addAttribute("film", film);
         model.addAttribute("city", cityService.getCityById(cityId));
+        model.addAttribute("dates", film.getDisplayPeriod());
 
         return "film_sessions_by_city_and_date";
     }
