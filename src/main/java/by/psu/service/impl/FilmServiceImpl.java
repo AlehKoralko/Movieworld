@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -73,18 +75,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     @Transactional
     public Film getFilmById(int id) {
-        Film film = this.filmDao.getById(id);
-        List<LocalDate> dates = new ArrayList<>();
-
-        for (int i = 0; i <= ChronoUnit.DAYS.between(film.getDateStart(), film.getDateEnd()); i++) {
-            dates.add(film.getDateStart().plusDays(i));
-        }
-
-        film.setDisplayPeriod(dates);
-        film.setFormatDateStart(film.getDateStart().format(DateTimeFormatter.ofPattern("dd.MM")));
-        film.setFormatDateEnd(film.getDateEnd().format(DateTimeFormatter.ofPattern("dd.MM")));
-
-        return film;
+        return this.filmDao.getById(id);
     }
 
     @Override
