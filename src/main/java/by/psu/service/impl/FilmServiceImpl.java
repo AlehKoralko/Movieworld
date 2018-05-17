@@ -1,6 +1,7 @@
 package by.psu.service.impl;
 
 import by.psu.dao.*;
+import by.psu.dto.FilmForm;
 import by.psu.model.*;
 import by.psu.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class FilmServiceImpl implements FilmService {
@@ -45,9 +48,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     @Transactional
-    public void addFilm(Film film) {
-        film.setDateStart(filmDateFormatter.parse(film.getFormatDateStart(), LocalDate::from));
-        film.setDateEnd(filmDateFormatter.parse(film.getFormatDateEnd(), LocalDate::from));
+    public void addFilm(FilmForm filmForm) {
+        Film film = filmForm.toFilm();
 
         Set<Actor> actors = new HashSet<>();
         Set<Director> directors = new HashSet<>();
@@ -55,11 +57,11 @@ public class FilmServiceImpl implements FilmService {
         Set<Operator> operators = new HashSet<>();
         Set<Country> countries = new HashSet<>();
 
-        Arrays.stream(film.getActorsId()).forEach(id -> actors.add(actorDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getDirectorsId()).forEach(id -> directors.add(directorDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getGenresId()).forEach(id -> genres.add(genreDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getOperatorsId()).forEach(id -> operators.add(operatorDao.getById(Integer.valueOf(id))));
-        Arrays.stream(film.getCountriesId()).forEach(id -> countries.add(countryDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getActorsId()).forEach(id -> actors.add(actorDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getDirectorsId()).forEach(id -> directors.add(directorDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getGenresId()).forEach(id -> genres.add(genreDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getOperatorsId()).forEach(id -> operators.add(operatorDao.getById(Integer.valueOf(id))));
+        Arrays.stream(filmForm.getCountriesId()).forEach(id -> countries.add(countryDao.getById(Integer.valueOf(id))));
 
         film.setActors(actors);
         film.setDirectors(directors);
@@ -73,18 +75,7 @@ public class FilmServiceImpl implements FilmService {
     @Override
     @Transactional
     public Film getFilmById(int id) {
-        Film film = this.filmDao.getById(id);
-        List<LocalDate> dates = new ArrayList<>();
-
-        for (int i = 0; i <= ChronoUnit.DAYS.between(film.getDateStart(), film.getDateEnd()); i++) {
-            dates.add(film.getDateStart().plusDays(i));
-        }
-
-        film.setDisplayPeriod(dates);
-        film.setFormatDateStart(film.getDateStart().format(DateTimeFormatter.ofPattern("dd.MM")));
-        film.setFormatDateEnd(film.getDateEnd().format(DateTimeFormatter.ofPattern("dd.MM")));
-
-        return film;
+        return this.filmDao.getById(id);
     }
 
     @Override

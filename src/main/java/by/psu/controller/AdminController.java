@@ -1,5 +1,7 @@
 package by.psu.controller;
 
+import by.psu.dto.FilmForm;
+import by.psu.dto.SessionForm;
 import by.psu.model.*;
 import by.psu.service.*;
 import by.psu.validator.*;
@@ -7,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdminController {
@@ -37,10 +36,13 @@ public class AdminController {
     private SessionService sessionService;
 
     @Autowired
-    private FilmValidator filmValidator;
+    private CinemaHallService cinemaHallService;
 
     @Autowired
-    private SessionValidator sessionValidator;
+    private FilmFormValidator filmFormValidator;
+
+    @Autowired
+    private SessionFormValidator sessionFormValidator;
 
     @Autowired
     private ActorValidator actorValidator;
@@ -212,10 +214,10 @@ public class AdminController {
         return "admin_operators";
     }
 
-    @RequestMapping(value = "/film_form", method = RequestMethod.GET)
+    @GetMapping(value = "/film_form")
     public String addFilm(Model model) {
 
-        model.addAttribute("film", new Film());
+        model.addAttribute("film", new FilmForm());
         model.addAttribute("actors", actorService.getAllActors());
         model.addAttribute("directors", directorService.getAllDirectors());
         model.addAttribute("operators", operatorService.getAllOperators());
@@ -225,10 +227,10 @@ public class AdminController {
         return "film_form";
     }
 
-    @RequestMapping(value = "/film_form", method = RequestMethod.POST)
-    public String addFilm(@ModelAttribute("film") Film film, BindingResult bindingResult, Model model) {
+    @PostMapping(value = "/film_form")
+    public String addFilm(@ModelAttribute("film") FilmForm filmForm, BindingResult bindingResult, Model model) {
 
-        filmValidator.validate(film, bindingResult);
+        filmFormValidator.validate(filmForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("actors", actorService.getAllActors());
@@ -240,14 +242,14 @@ public class AdminController {
             return "film_form";
         }
 
-        filmService.addFilm(film);
+        filmService.addFilm(filmForm);
 
         return "redirect:/film_form";
     }
 
     @RequestMapping(value = "/session_form", method = RequestMethod.GET)
     public String addSession(Model model) {
-        model.addAttribute("session", new Session());
+        model.addAttribute("sessionForm", new SessionForm());
         model.addAttribute("films", filmService.getAllFilms());
         model.addAttribute("cinemaHalls", filmService.getAllCinemaHalls());
 
@@ -255,17 +257,24 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/session_form", method = RequestMethod.POST)
-    public String addSession(@ModelAttribute("session") Session session, BindingResult bindingResult, Model model) {
-        sessionValidator.validate(session, bindingResult);
+    public String addSession(@ModelAttribute("sessionForm") SessionForm sessionForm,
+                             BindingResult bindingResult, Model model) {
+
+        sessionFormValidator.validate(sessionForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("films", filmService.getAllFilms());
             model.addAttribute("cinemaHalls", filmService.getAllCinemaHalls());
 
             return "session_form";
-        }
+        } else {
+            Session session = sessionForm.toSession();
 
-        sessionService.addSession(session);
+            session.setFilm(filmService.getFilmById(new Integer(sessionForm.getFilmId())));
+            session.setCinemaHall(cinemaHallService.getCinemaHallById(new Integer(sessionForm.getCinemaHallId())));
+
+            sessionService.addSession(session);
+        }
 
         return "redirect:/session_form";
     }

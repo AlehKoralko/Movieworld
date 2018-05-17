@@ -2,8 +2,11 @@ package by.psu.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 @Entity
 @Table(name = "film")
@@ -36,32 +39,7 @@ public class Film {
     private LocalDate dateEnd;
 
     @Column(name = "price")
-
     private double price;
-
-    @Transient
-    private List<LocalDate> displayPeriod;
-
-    @Transient
-    private String formatDateStart;
-
-    @Transient
-    private String formatDateEnd;
-
-    @Transient
-    private String[] genresId;
-
-    @Transient
-    private String[] actorsId;
-
-    @Transient
-    private String[] directorsId;
-
-    @Transient
-    private String[] operatorsId;
-
-    @Transient
-    private String[] countriesId;
 
     @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
     private Set<Session> sessions;
@@ -219,76 +197,12 @@ public class Film {
         this.about = about;
     }
 
-    public List<LocalDate> getDisplayPeriod() {
-        return displayPeriod;
-    }
-
-    public void setDisplayPeriod(List<LocalDate> displayPeriod) {
-        this.displayPeriod = displayPeriod;
-    }
-
-    public String getFormatDateStart() {
-        return formatDateStart;
-    }
-
-    public void setFormatDateStart(String formatDateStart) {
-        this.formatDateStart = formatDateStart;
-    }
-
-    public String getFormatDateEnd() {
-        return formatDateEnd;
-    }
-
-    public void setFormatDateEnd(String formatDateEnd) {
-        this.formatDateEnd = formatDateEnd;
-    }
-
-    public String[] getGenresId() {
-        return genresId;
-    }
-
-    public void setGenresId(String[] genresId) {
-        this.genresId = genresId;
-    }
-
-    public String[] getDirectorsId() {
-        return directorsId;
-    }
-
-    public void setDirectorsId(String[] directorsId) {
-        this.directorsId = directorsId;
-    }
-
-    public String[] getOperatorsId() {
-        return operatorsId;
-    }
-
-    public void setOperatorsId(String[] operatorsId) {
-        this.operatorsId = operatorsId;
-    }
-
-    public String[] getCountriesId() {
-        return countriesId;
-    }
-
-    public void setCountriesId(String[] countriesId) {
-        this.countriesId = countriesId;
-    }
-
     public Set<Session> getSessions() {
         return sessions;
     }
 
     public void setSessions(Set<Session> sessions) {
         this.sessions = sessions;
-    }
-
-    public String[] getActorsId() {
-        return actorsId;
-    }
-
-    public void setActorsId(String[] actorsId) {
-        this.actorsId = actorsId;
     }
 
     public double getPrice() {
@@ -299,10 +213,21 @@ public class Film {
         this.price = price;
     }
 
+    public Map<LocalDate, String> getDisplayPeriod() {
+        Map<LocalDate, String> dates = new TreeMap<>();
+
+        for (int i = 0; i <= ChronoUnit.DAYS.between(this.getDateStart(), this.getDateEnd()); i++) {
+            dates.put(this.getDateStart().plusDays(i),
+                    this.getDateStart().plusDays(i).format(DateTimeFormatter.ofPattern("dd.MM")));
+        }
+
+        return dates;
+    }
+
     @Override
     public String toString() {
-        return "Film [id=" + id + ", name=" + name + ", year=" + year + ", trailer=" + trailer + ", genresId="
-                + genresId + ", directors=" + directors + ", actors=" + actors + ", countries="
+        return "Film [id=" + id + ", name=" + name + ", year=" + year + ", trailer=" + trailer
+                + ", directors=" + directors + ", actors=" + actors + ", countries="
                 + countries + ", genres=" + genres + ", operators=" + operators + "]";
     }
 

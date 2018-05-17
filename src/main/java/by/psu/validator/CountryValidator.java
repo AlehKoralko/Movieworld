@@ -27,8 +27,10 @@ public class CountryValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Required");
 
-        if (countryService.getByName(country.getName()) != null) {
-            errors.rejectValue("name", "Unique");
+        if (! errors.hasFieldErrors("name")) {
+            if (countryService.getByName(country.getName()) != null) {
+                errors.rejectValue("name", "Unique");
+            }
         }
     }
 }
